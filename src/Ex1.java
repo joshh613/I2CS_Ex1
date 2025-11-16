@@ -3,7 +3,7 @@
  * Ex1: arrays, static functions and JUnit
  * https://docs.google.com/document/d/1GcNQht9rsVVSt153Y8pFPqXJVju56CY4/edit?usp=sharing&ouid=113711744349547563645&rtpof=true&sd=true
  * <p>
- * This class represents a set of static methods on a polynomial functions - represented as an array of doubles.
+ * This class represents a set of static methods on a polynomial function - represented as an array of doubles.
  * The array {0.1, 0, -3, 0.2} represents the following polynomial function: 0.2x^3-3x^2+0.1
  * This is the main Class you should implement (see "add your code below")
  *
@@ -23,7 +23,7 @@ public class Ex1 {
      * Computes the f(x) value of the polynomial function at x.
      *
      * @param poly - polynomial function
-     * @param x
+     * @param x    - value at which to evaluate
      * @return f(x) - the polynomial function value at x.
      */
     public static double f(double[] poly, double x) {
@@ -37,8 +37,8 @@ public class Ex1 {
 
     /**
      * Given a polynomial function (p), a range [x1,x2] and an epsilon eps.
-     * This function computes an x value (x1<=x<=x2) for which |p(x)| < eps,
-     * assuming p(x1)*p(x2) <= 0.
+     * This function computes an x value (x1<=x<=x2) for which |p(x)| < eps, (i.e. finding the root)
+     * assuming p(x1)*p(x2) <= 0. (i.e. one is above y=0 and one is below)
      * This function should be implemented recursively.
      *
      * @param p   - the polynomial function
@@ -49,14 +49,14 @@ public class Ex1 {
      */
     public static double root_rec(double[] p, double x1, double x2, double eps) {
         double f1 = f(p, x1);
-        double x12 = (x1 + x2) / 2;
+        double x12 = (x1 + x2) / 2; //midpoint
         double f12 = f(p, x12);
         if (Math.abs(f12) < eps) {
             return x12;
         }
-        if (f12 * f1 <= 0) {
+        if (f12 * f1 <= 0) { //we can search between x1 and midpoint
             return root_rec(p, x1, x12, eps);
-        } else {
+        } else { //we search between midpoint and x2
             return root_rec(p, x12, x2, eps);
         }
     }
@@ -66,8 +66,8 @@ public class Ex1 {
      * The solution is based on: //	http://stackoverflow.com/questions/717762/how-to-calculate-the-vertex-of-a-parabola-given-three-points
      * Note: this function only works for a set of points containing up to 3 points, else returns null.
      *
-     * @param xx
-     * @param yy
+     * @param xx x values of the points
+     * @param yy y values of the points
      * @return an array of doubles representing the coefficients of the polynom.
      */
     public static double[] PolynomFromPoints(double[] xx, double[] yy) {
@@ -83,7 +83,7 @@ public class Ex1 {
     }
 
     /**
-     * Two polynomials functions are equal if and only if they have the same values f(x) for n+1 values of x,
+     * Two polynomial functions are equal if and only if they have the same values f(x) for n+1 values of x,
      * where n is the max degree (over p1, p2) - up to an epsilon (aka EPS) value.
      *
      * @param p1 first polynomial function
@@ -137,7 +137,7 @@ public class Ex1 {
     }
 
     /**
-     * Given a polynomial function (p), a range [x1,x2] and an integer with the number (n) of sample points.
+     * Given a polynomial function (p), a range [x1,x2] and an integer representing the number (n) of sample points.
      * This function computes an approximation of the length of the function between f(x1) and f(x2)
      * using n inner sample points and computing the segment-path between them.
      * assuming x1 < x2.
@@ -158,9 +158,9 @@ public class Ex1 {
     }
 
     /**
-     * Given two polynomial functions (p1,p2), a range [x1,x2] and an integer representing the number of Trapezoids between the functions (number of samples in on each polynom).
+     * Given two polynomial functions (p1,p2), a range [x1,x2] and an integer representing the number of Trapezoids between the functions (number of samples on each polynom).
      * This function computes an approximation of the area between the polynomial functions within the x-range.
-     * The area is computed using Riemann's like integral (https://en.wikipedia.org/wiki/Riemann_integral)
+     * The area is computed using a Riemann-like integral (https://en.wikipedia.org/wiki/Riemann_integral)
      *
      * @param p1                - first polynomial function
      * @param p2                - second polynomial function
@@ -179,11 +179,11 @@ public class Ex1 {
 
     /**
      * This function computes the array representation of a polynomial function from a String
-     * representation. Note:given a polynomial function represented as a double array,
+     * representation. Note: given a polynomial function represented as a double array,
      * getPolynomFromString(poly(p)) should return an array equals to p.
      *
      * @param p - a String representing polynomial function.
-     * @return
+     * @return the array representing polynomial p
      */
     public static double[] getPolynomFromString(String p) {
         double[] ans = ZERO;//  -1.0x^2 +3.0x +2.0
@@ -196,9 +196,9 @@ public class Ex1 {
     /**
      * This function computes the polynomial function which is the sum of two polynomial functions (p1,p2)
      *
-     * @param p1
-     * @param p2
-     * @return
+     * @param p1 first polynomial
+     * @param p2 second polynomial
+     * @return p1+p2
      */
     public static double[] add(double[] p1, double[] p2) {
         double[] ans = ZERO;//
@@ -211,9 +211,9 @@ public class Ex1 {
     /**
      * This function computes the polynomial function which is the multiplication of two polynoms (p1,p2)
      *
-     * @param p1
-     * @param p2
-     * @return
+     * @param p1 first polynomial
+     * @param p2 second polynomial
+     * @return p1*p2
      */
     public static double[] mul(double[] p1, double[] p2) {
         double[] ans = ZERO;//
@@ -226,8 +226,8 @@ public class Ex1 {
     /**
      * This function computes the derivative of the p0 polynomial function.
      *
-     * @param po
-     * @return
+     * @param po polynomial to calculate its derivative
+     * @return d/dx (po)
      */
     public static double[] derivative(double[] po) {
         double[] ans = ZERO;//
