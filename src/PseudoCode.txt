@@ -1,0 +1,82 @@
+//FUNCTION 1
+double[] PolynomFromPoints(double[] xx, yy):
+
+double[] ans = null
+
+if (xx==null || yy==null):
+    return ans
+
+int lx=xx.length, ly=yy.length
+
+if (lx!=ly || lx<=1 || lx>=4):
+    return ans
+
+//xx contains 2 or 3 points, and yy contains the same
+
+//we're looking for the values a,b,c in the equation a + b x + c x^2 = 0
+//if xx contains two points, then C=0
+
+int denom,a,b,c
+
+if (lx==2):
+    return ans
+
+//xx and yy contain three points
+
+denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
+a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
+b = (x[2] * x[2] * (y[0] - y[1]) + x[1] * x[1] * (y[2] - y[0]) + x[0] * x[0] * (y[1] - y[2])) / denom
+c = (x[1] * x[2] * (x[1] - x[2]) * y[0] + x[2] * x[0] * (x[2] - x[0]) * y[1] + x[0] * x[1] * (x[0] - x[1]) * y[2]) / denom
+
+ans = new double[]{a, b, c}
+
+return ans
+
+
+//FUNCTION 2
+boolean equal(double[] p1, p2):
+
+if (p1==null || p2==null):
+    return p1==null && p2==null //if they're both null, they're 'equal'
+
+if (p1.length != p2.length):
+    return false
+
+for (int i=0; i<p1.length, i++):
+    if (p1[i] != p2[i]):
+        return false
+
+return true
+
+
+//FUNCTION 3
+String poly(double[] poly):
+
+if (poly==nul || poly.length==0):
+    return ""
+
+String ans = ""
+for (int i=poly.length-1; i>1; i--):
+    ans += poly[i] + "x^" + i
+
+if (poly.length>1):
+    ans += poly[1] + "x"
+
+ans += poly[0]
+
+return ans
+
+
+//FUNCTION 4
+double sameValue(double[] p1, p2, double x1, x2, eps):
+
+if (p2==null):
+    return -1
+
+for (int i=0; i<p2.length; i++):
+    p2[i] *= -1
+
+p1 = add(p1, p2)
+
+return root_rec(p1, x1, x2, eps)
+
