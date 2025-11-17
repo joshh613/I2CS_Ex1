@@ -50,29 +50,25 @@ String poly(double[] poly):
 if (poly==null || poly.length==0):
     return "0"
 
-String ans = ""
-
-int n = poly.length
-if (n>2):
-    for (int i=n-2; i>1; i--):
-        coef = poly[i]
-        if (coef>0):
-            ans += "+" + coef + "x^" + i + " "
-        elif (coef<0):
-            ans += coef + "x^" + i + " "
-
-if (n>1):
-    coef = poly[1]
+String[] parts = new String[poly.length]
+for (int i=0; i<poly.length; i++):
+    double coef = poly[i]
     if (coef>0):
-        ans += "+" + coef + "x" + " "
+        parts[i] = " +" + coef
     elif (coef<0):
-        ans += coef + "x" + " "
+        parts[i] = " " + coef
 
-coef = poly[0]
-if (coef>0):
-    ans += "+" + coef
-elif (coef<0):
-    ans += coef
+if (parts.length>1 && parts[1]!=""):
+    parts[1] += "x"
+
+for (int i=2; i<parts.length; i++):
+    String coef = parts[i]
+    if (coef!=""):
+        parts[i] += "x^" + i
+
+String ans = ""
+for (int i=parts.length-1; i>=0; i--):
+    ans += parts[i]
 
 if (ans==""):
     ans = "0"
@@ -92,7 +88,7 @@ for (int i=0; i<p1.length; i++):
 for (int i=0; i<p2.length; i++):
     p[i] -= p2[i]
 
-return root_rec(p1, x1, x2, eps)
+return root_rec(p, x1, x2, eps)
 
 
 //FUNCTION 5
@@ -115,24 +111,33 @@ return ans
 
 
 //FUNCTION 6
-double[] getPolynomFromString(String p): //assumes spaces in between
+double[] getPolynomFromString(String p): //assumes spaces in between expressions
 
-String[] expr = p.split(" ")
+String[] parts = p.split(" ")
+for (int i=0; i<parts.length; i++):
+    parts[i] = parts[i].split("^")
 
 int highestPower = 0
-for (int i=0; i<expr.length;i++):
-    if (expr[i].length()>1):
-        int power = expr[i].substring(expr[i].length() - 1)
-        highestPower = Math.max(highestPower, power)
+for (int i=0; i<parts.length; i++):
+    String part = parts[i]
+    if (part.length>0): //has an explicit exponent
+        highestPower = Math.max(highestPower, part[1])
+    else:
+        if (part.substring(part-1)=="x"):
+            highestPower = Math.max(highestPower, 1)
 
 double[] ans = new double[highestPower+1]
+for (int i=0; i<parts.length; i++):
+    String part = parts[i]
+    int power = 0
 
-for (int i=0; i<expr.length;i++):
-    String[] parts = expr.split["^"]
-    if (part.length==1):
-        ans[0] = parts[0]
+    if (part.length>0): //has an explicit exponent
+        power = part[1]
     else:
-        ans[parts[1]] = parts[0]
+        if (part.substring(part-1)=="x"):
+            power = 1
+
+    ans[power] = parts[0]
 
 return ans
 
@@ -158,7 +163,7 @@ double[] mul(double[] p1, p2):
 if (p1==null || p2==null || p1.length==0 || p2.length==0):
     return null
 
-double[] ans = new double[p1.length+p2.length]
+double[] ans = new double[p1.length+p2.length-1]
 
 for (int i=0; i<p1.length; i++):
     for (int j=0; j<p2.length; j++):
