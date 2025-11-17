@@ -1,36 +1,29 @@
 //FUNCTION 1
-double[] PolynomFromPoints(double[] xx, yy):
-
-double[] ans = null
+double[] PolynomFromPoints(double[] x, y):
 
 if (xx==null || yy==null):
-    return ans
+    return null
 
 int lx=xx.length, ly=yy.length
 
-if (lx!=ly || lx<=1 || lx>=4):
-    return ans
-
-//xx contains 2 or 3 points, and yy contains the same
-
-//we're looking for the values a,b,c in the equation a + b x + c x^2 = 0
-//if xx contains two points, then C=0
-
-int denom,a,b,c
+if (lx!=ly):
+    return null
 
 if (lx==2):
-    return ans
+    double b = (y[1]-y[0]) / (x[1]-x[0])
+    double a = y[0] - b*x[0]
 
-//xx and yy contain three points
+    return new double[]{a, b}
 
-denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
-a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
-b = (x[2] * x[2] * (y[0] - y[1]) + x[1] * x[1] * (y[2] - y[0]) + x[0] * x[0] * (y[1] - y[2])) / denom
-c = (x[1] * x[2] * (x[1] - x[2]) * y[0] + x[2] * x[0] * (x[2] - x[0]) * y[1] + x[0] * x[1] * (x[0] - x[1]) * y[2]) / denom
+if (lx==3):
+    double denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
+    double a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
+    double b = (x[2] * x[2] * (y[0] - y[1]) + x[1] * x[1] * (y[2] - y[0]) + x[0] * x[0] * (y[1] - y[2])) / denom
+    double c = (x[1] * x[2] * (x[1] - x[2]) * y[0] + x[2] * x[0] * (x[2] - x[0]) * y[1] + x[0] * x[1] * (x[0] - x[1]) * y[2]) / denom
 
-ans = new double[]{a, b, c}
+    return new double[]{a, b, c}
 
-return ans
+return null
 
 
 //FUNCTION 2
@@ -39,11 +32,13 @@ boolean equal(double[] p1, p2):
 if (p1==null || p2==null):
     return p1==null && p2==null //if they're both null, they're 'equal'
 
-if (p1.length != p2.length):
-    return false
+int n = Math.max(p1.length, p2.length)
 
-for (int i=0; i<p1.length, i++):
-    if (p1[i] != p2[i]):
+for (int i=0, i<n; i++):
+    double y1 = f(p1, i)
+    double y2 = f(p2, i)
+
+    if (Math.abs(y1-y2) > EPS):
         return false
 
 return true
@@ -52,17 +47,35 @@ return true
 //FUNCTION 3
 String poly(double[] poly):
 
-if (poly==nul || poly.length==0):
-    return ""
+if (poly==null || poly.length==0):
+    return "0"
 
 String ans = ""
-for (int i=poly.length-1; i>1; i--):
-    ans += poly[i] + "x^" + i
 
-if (poly.length>1):
-    ans += poly[1] + "x"
+int n = poly.length
+if (n>2):
+    for (int i=n-2; i>1; i--):
+        coef = poly[i]
+        if (coef>0):
+            ans += "+" + coef + "x^" + i + " "
+        elif (coef<0):
+            ans += coef + "x^" + i + " "
 
-ans += poly[0]
+if (n>1):
+    coef = poly[1]
+    if (coef>0):
+        ans += "+" + coef + "x" + " "
+    elif (coef<0):
+        ans += coef + "x" + " "
+
+coef = poly[0]
+if (coef>0):
+    ans += "+" + coef
+elif (coef<0):
+    ans += coef
+
+if (ans==""):
+    ans = "0"
 
 return ans
 
