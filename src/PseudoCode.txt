@@ -80,3 +80,89 @@ p1 = add(p1, p2)
 
 return root_rec(p1, x1, x2, eps)
 
+
+//FUNCTION 5
+double length(double[] p, double x1, x2, int numberOfSegments):
+
+double ans = 0
+
+double width = (x2 - x1) / numberOfSegments
+double widthSquared = width*width
+
+for (int i=0; i<=numberOfSegments; i++):
+    //using Pythagoras' theorem
+    double startX = x1 + width*i
+    double endX = start + width
+    double height = f(p, endX) - f(p, startX)
+
+    ans += Math.sqrt(widthSquared + height*height)
+
+return ans
+
+
+//FUNCTION 6
+double[] getPolynomFromString(String p):
+
+String[] coef = p.split(" ")
+double[] ans = new double[coef.length]
+
+for (int i=0; i<coef.length; i++):
+    if (coef[i].charAt(0)=="+"):
+        ans[ans.length-1-i] = (double) originalString.substring(1)
+    else:
+        ans[ans.length-1-i] -= (double) originalString.substring(1)
+
+return ans
+
+
+//FUNCTION 6
+double[] add(double[] p1, p2):
+
+if (p1==null || p2==null):
+    return null
+
+if (p1.length > p2.length):
+    return simpleAdd(p1, p2)
+
+return simpleAdd(p2, p1)
+
+
+//FUNCTION 6A
+double[] simpleAdd(double[] p1, p2):
+
+for (int i=0; i<p2.length; i++):
+    p1[i] += p2[i]
+
+return p1
+
+
+//FUNCTION 7
+double[] mul(double[] p1, p2):
+
+if (p1==null || p2==null || p1.length==0 || p2.length==0):
+    return null
+
+double[] ans = new double[p1.length*p2.length]
+
+for (int i=0; i<p1.length; i++):
+    for (int j=0; j<p2.length; j++):
+        ans[i+j] += p1[i]*p2[i]
+
+return ans
+
+
+//FUNCTION 8
+double[] derivative(double[] po):
+
+if (po==null || po.length==0):
+    return null
+
+if (po.length==1):
+    return ZERO
+
+double[] ans = new double[po.length-1]
+
+for (int i=1; i<po.length; i++):
+    ans[i] = po[i]*i
+
+return ans
