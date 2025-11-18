@@ -252,3 +252,49 @@ class Ex1Test {
         for (int i = 0; i < ans.length; i = i + 1) {
             assertEquals(ans[i], expected[i], Ex1.EPS);
         }
+
+        xx = new double[]{0, 1};
+        yy = new double[]{1, 6};
+        expected = new double[]{1, 5};
+        ans = Ex1.PolynomFromPoints(xx, yy);
+        for (int i = 0; i < ans.length; i = i + 1) {
+            assertEquals(ans[i], expected[i], Ex1.EPS);
+        }
+    }
+
+    @Test
+    void testEquals1() {
+    }
+
+    @Test
+    void poly() {
+    }
+
+    @Test
+    void sameValue() {
+    }
+
+    @Test
+    void length() {
+    }
+
+    @Test
+    void area() {
+    }
+
+    @Test
+    void getPolynomFromString() {
+    }
+
+    @Test
+    void add() {
+    }
+
+    @Test
+    void mul() {
+    }
+
+    @Test
+    void derivative() {
+    }
+}
