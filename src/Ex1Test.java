@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class Ex1Test {
     static final double[] P1 = {2, 0, 3, -1, 0}, P2 = {0.1, 0, 1, 0.1, 3};
     static double[] po1 = {2, 2}, po2 = {-3, 0.61, 0.2};
-    ;
     static double[] po3 = {2, 1, -0.7, -0.02, 0.02};
     static double[] po4 = {-3, 0.61, 0.2};
 
@@ -131,8 +130,7 @@ class Ex1Test {
     @Test
     /**
      * Tests the parsing of a polynom in a String like form.
-     */
-    public void testFromString() {
+     */ public void testFromString() {
         double[] p = {-1.1, 2.3, 3.1}; // 3.1X^2+ 2.3x -1.1
         String sp2 = "3.1x^2 +2.3x -1.1";
         String sp = Ex1.poly(p);
@@ -152,8 +150,7 @@ class Ex1Test {
     @Test
     /**
      * Tests the equality of pairs of arrays.
-     */
-    public void testEquals() {
+     */ public void testEquals() {
         double[][] d1 = {{0}, {1}, {1, 2, 0, 0}};
         double[][] d2 = {Ex1.ZERO, {1 + Ex1.EPS / 2}, {1, 2}};
         double[][] xx = {{-2 * Ex1.EPS}, {1 + Ex1.EPS * 1.2}, {1, 2, Ex1.EPS / 2}};
@@ -168,8 +165,7 @@ class Ex1Test {
     @Test
     /**
      * Tests is the sameValue function is symmetric.
-     */
-    public void testSameValue2() {
+     */ public void testSameValue2() {
         double x1 = -4, x2 = 0;
         double rs1 = Ex1.sameValue(po1, po2, x1, x2, Ex1.EPS);
         double rs2 = Ex1.sameValue(po2, po1, x1, x2, Ex1.EPS);
@@ -179,8 +175,7 @@ class Ex1Test {
     @Test
     /**
      * Test the area function - it should be symmetric.
-     */
-    public void testArea() {
+     */ public void testArea() {
         double x1 = -4, x2 = 0;
         double a1 = Ex1.area(po1, po2, x1, x2, 100);
         double a2 = Ex1.area(po2, po1, x1, x2, 100);
@@ -190,8 +185,7 @@ class Ex1Test {
     @Test
     /**
      * Test the area f1(x)=0, f2(x)=x;
-     */
-    public void testArea2() {
+     */ public void testArea2() {
         double[] po_a = Ex1.ZERO;
         double[] po_b = {0, 1};
         double x1 = -1;
@@ -210,8 +204,7 @@ class Ex1Test {
     @Test
     /**
      * Test the area function.
-     */
-    public void testArea3() {
+     */ public void testArea3() {
         double[] po_a = {2, 1, -0.7, -0.02, 0.02};
         double[] po_b = {6, 0.1, -0.2};
         double x1 = Ex1.sameValue(po_a, po_b, -10, -5, Ex1.EPS);
