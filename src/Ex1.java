@@ -215,10 +215,19 @@ public class Ex1 {
      * @return the length approximation of the function between f(x1) and f(x2).
      */
     public static double length(double[] p, double x1, double x2, int numberOfSegments) {
-        double ans = x1;
-        /** add you code below
+        double ans = 0;
 
-         /////////////////// */
+        double width = (x2 - x1) / numberOfSegments;
+        double widthSquared = width*width;
+
+        for (int i=0; i<numberOfSegments; i++) {
+            double startX = x1 + width * i;
+            double endX = startX + width;
+            double height = f(p, endX) - f(p, startX);
+
+            ans += Math.sqrt(widthSquared + height * height);
+        }
+
         return ans;
     }
 
