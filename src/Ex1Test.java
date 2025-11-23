@@ -427,4 +427,14 @@ class Ex1Test {
             assertEquals(expected[i], ans[i], Ex1.EPS);
         }
     }
+
+    @Test
+    void neg() {
+        double[] p = {1, 2, 3};
+        double[] expected = {-1, -2, -3};
+        double[] ans = Ex1.neg(p);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
+    }
 }

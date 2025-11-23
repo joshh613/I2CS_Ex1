@@ -236,4 +236,8 @@ public class Ex1 {
          /////////////////// */
         return ans;
     }
+
+    public static double[] neg(double[] p) {
+        return p;
+    }
 }
