@@ -280,7 +280,7 @@ class Ex1Test {
         p1 = new double[]{3, 2, 1};
         p2 = new double[]{6, 4, 2};
         ans = Ex1.equals(p1, p2);
-        assertTrue(ans);
+        assertFalse(ans);
     }
 
     @Test

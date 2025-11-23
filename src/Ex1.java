@@ -108,11 +108,22 @@ public class Ex1 {
      * @return true iff p1 represents the same polynomial function as p2.
      */
     public static boolean equals(double[] p1, double[] p2) {
-        boolean ans = true;
-        /** add you code below
+        if (p1 == null || p2 == null) {
+            return p1 == null && p2 == null;
+        }
 
-         /////////////////// */
-        return ans;
+        int n = Math.max(p1.length, p2.length);
+
+        for (int i = 0; i < n; i++) {
+            double y1 = f(p1, i);
+            double y2 = f(p2, i);
+
+            if (Math.abs(y1 - y2) > EPS) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
