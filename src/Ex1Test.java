@@ -350,7 +350,7 @@ class Ex1Test {
         x1 = -2;
         x2 = 2;
         segments = 1_000;
-        expected = 1 / 3 * 4 * 2;
+        expected = 1.0 / 3 * (4 * 4) * 2;
         ans = Ex1.area(p1, p2, x1, x2, segments);
         assertEquals(expected, ans, Ex1.EPS);
     }
