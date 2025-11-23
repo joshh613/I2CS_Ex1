@@ -265,10 +265,18 @@ public class Ex1 {
      * @return p1+p2
      */
     public static double[] add(double[] p1, double[] p2) {
-        double[] ans = ZERO;//
-        /** add you code below
+        if (p1==null || p2==null) {
+            return null;
+        }
 
-         /////////////////// */
+        double[] ans = new double[Math.max(p1.length, p2.length)];
+        for (int i=0; i<p1.length; i++) {
+            ans[i] = p1[i];
+        }
+        for (int i=0; i<p2.length; i++) {
+            ans[i] += p2[i];
+        }
+
         return ans;
     }
 
@@ -302,6 +310,15 @@ public class Ex1 {
     }
 
     public static double[] neg(double[] p) {
-        return p;
+        if (p==null || p.length==0) {
+            return null;
+        }
+
+        double[] ans = new double[p.length];
+        for (int i=0; i<p.length; i++) {
+            ans[i] = -p[i];
+        }
+
+        return ans;
     }
 }
