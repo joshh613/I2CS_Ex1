@@ -1,5 +1,5 @@
 //FUNCTION 1
-double[] PolynomFromPoints(double[] x, y):
+double[] PolynomFromPoints(double[] xx, yy):
 
 if (xx==null || yy==null):
     return null
@@ -10,7 +10,7 @@ if (lx!=ly):
     return null
 
 if (lx==2):
-    double b = (y[1]-y[0]) / (x[1]-x[0])
+    double b = (y[1]-y[0]) / (x[1]-x[0]) //TODO: check we aren't diving by zero
     double a = y[0] - b*x[0]
 
     return new double[]{a, b}
@@ -27,7 +27,7 @@ return null
 
 
 //FUNCTION 2
-boolean equal(double[] p1, p2):
+boolean equals(double[] p1, p2):
 
 if (p1==null || p2==null):
     return p1==null && p2==null //if they're both null, they're 'equal'
