@@ -193,11 +193,12 @@ public class Ex1 {
      * @return an x value (x1<=x<=x2) for which |p1(x) - p2(x)| < eps.
      */
     public static double sameValue(double[] p1, double[] p2, double x1, double x2, double eps) {
-        double ans = x1;
-        /** add you code below
+        if (p1==null || p2==null) {
+            return -1;
+        }
 
-         /////////////////// */
-        return ans;
+        double[] p = add(p1, neg(p2));
+        return root_rec(p, x1, x2, eps);
     }
 
     /**

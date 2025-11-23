@@ -92,7 +92,6 @@ if (p1==null || p2==null):
     return -1
 
 double[] p = add(p1, neg(p2))
-
 return root_rec(p, x1, x2, eps)
 
 
