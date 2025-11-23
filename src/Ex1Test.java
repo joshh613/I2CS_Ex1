@@ -360,16 +360,12 @@ class Ex1Test {
         String p = "-1.0x^2 +3.0x +2.0";
         double[] expected = {2, 3, -1};
         double[] ans = Ex1.getPolynomFromString(p);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
 
         p = "3x^3 -x";
         expected = new double[]{0, -1, 0, 3};
         ans = Ex1.getPolynomFromString(p);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
@@ -378,17 +374,13 @@ class Ex1Test {
         double[] p2 = {4, 5, 6};
         double[] expected = {5, 7, 9};
         double[] ans = Ex1.add(p1, p2);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
 
         p1 = Ex1.ZERO;
         p2 = Ex1.ZERO;
         expected = Ex1.ZERO;
         ans = Ex1.add(p1, p2);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
@@ -397,17 +389,13 @@ class Ex1Test {
         double[] p2 = {1, 2, 3};
         double[] expected = {0, 1, 2, 3};
         double[] ans = Ex1.mul(p1, p2);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
 
         p1 = Ex1.ZERO;
         p2 = new double[]{1, 1, 1};
         expected = Ex1.ZERO;
         ans = Ex1.mul(p1, p2);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
@@ -415,15 +403,11 @@ class Ex1Test {
         double[] p = {1, 1, 1, 1};
         double[] expected = {1, 2, 3};
         double[] ans = Ex1.derivative(p);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
 
         p = Ex1.ZERO;
         expected = Ex1.ZERO;
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
@@ -431,8 +415,6 @@ class Ex1Test {
         double[] p = {1, 2, 3};
         double[] expected = {-1, -2, -3};
         double[] ans = Ex1.neg(p);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(expected[i], ans[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
     }
 }
