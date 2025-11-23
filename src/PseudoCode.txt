@@ -82,11 +82,7 @@ double sameValue(double[] p1, p2, double x1, x2, eps):
 if (p1==null || p2==null):
     return -1
 
-double[] p = new double[Math.max(p1.length, p2.length)]
-for (int i=0; i<p1.length; i++):
-    p[i] = p1[i]
-for (int i=0; i<p2.length; i++):
-    p[i] -= p2[i]
+double[] p = add(p1, neg(p2))
 
 return root_rec(p, x1, x2, eps)
 
@@ -208,5 +204,18 @@ double[] ans = new double[po.length-1]
 
 for (int i=1; i<po.length; i++):
     ans[i-1] = po[i]*i
+
+return ans
+
+
+//FUNCTION 11
+double[] neg(double[] p):
+
+if (p==null || p.length==0):
+    return null
+
+double[] ans = new double[p.length]
+for (int i=0; i<p.length; i++):
+    ans[i] = -p[i]
 
 return ans
