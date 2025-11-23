@@ -264,20 +264,20 @@ class Ex1Test {
 
     @Test
     void equals() {
-         double[] p1 = {1, 2, 3};
-         double[] p2 = {4, 5, 6};
-         boolean ans = Ex1.equals(p1, p2);
-         assertFalse(ans);
+        double[] p1 = {1, 2, 3};
+        double[] p2 = {4, 5, 6};
+        boolean ans = Ex1.equals(p1, p2);
+        assertFalse(ans);
 
-         p1 = new double[]{1, 1, 1};
-         p2 = new double[]{0, 0};
-         ans = Ex1.equals(p1, p2);
-         assertFalse(ans);
+        p1 = new double[]{1, 1, 1};
+        p2 = new double[]{0, 0};
+        ans = Ex1.equals(p1, p2);
+        assertFalse(ans);
 
-         p1 = new double[]{2, 3, 2};
-         p2 = new double[]{2, 3, 2};
-         ans = Ex1.equals(p1, p2);
-         assertTrue(ans);
+        p1 = new double[]{2, 3, 2};
+        p2 = new double[]{2, 3, 2};
+        ans = Ex1.equals(p1, p2);
+        assertTrue(ans);
 
         p1 = new double[]{3, 2, 1};
         p2 = new double[]{6, 4, 2};
@@ -287,72 +287,144 @@ class Ex1Test {
 
     @Test
     void poly() {
-         double[] p = {2, 0, 3.1, -1.2};
-         String expected = "-1.2x^3 +3.1x^2 +2.0";
-         String ans = Ex1.poly(p);
-         assertEquals(expected, ans);
+        double[] p = {2, 0, 3.1, -1.2};
+        String expected = "-1.2x^3 +3.1x^2 +2.0";
+        String ans = Ex1.poly(p);
+        assertEquals(expected, ans);
 
-         p = new double[]{3, 2, 1};
-         expected = "x^2 +x +1.0";
-         ans =  Ex1.poly(p);
-         assertEquals(expected, ans);
+        p = new double[]{3, 2, 1};
+        expected = "x^2 +x +1.0";
+        ans = Ex1.poly(p);
+        assertEquals(expected, ans);
     }
 
     @Test
     void sameValue() {
-         double[] p1 = {0, 1};
-         double[] p2 = {0, 0, 1};
-         double x1 = -1;
-         double x2 = 1;
-         double expected = 0;
-         double ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
-         assertEquals(expected, ans, Ex1.EPS);
+        double[] p1 = {0, 1};
+        double[] p2 = {0, 0, 1};
+        double x1 = -1;
+        double x2 = 1;
+        double expected = 0;
+        double ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
+        assertEquals(expected, ans, Ex1.EPS);
 
-         p1 = new double[]{1, 1};
-         p2 = new double[]{0, -1, 1};
-         x1 = -5;
-         x2 = 0;
-         expected = -1;
-         ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
-         assertEquals(expected, ans, Ex1.EPS);
+        p1 = new double[]{1, 1};
+        p2 = new double[]{0, -1, 1};
+        x1 = -5;
+        x2 = 0;
+        expected = -1;
+        ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
+        assertEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
     void length() {
-         double[] p = {0, 1};
-         double x1 = 0;
-         double x2 = 1;
-         int segments = 1;
-         double expected = Math.sqrt(2);
-         double ans = Ex1.length(p, x1, x2, segments);
-         assertEquals(expected, ans, Ex1.EPS);
+        double[] p = {0, 1};
+        double x1 = 0;
+        double x2 = 1;
+        int segments = 1;
+        double expected = Math.sqrt(2);
+        double ans = Ex1.length(p, x1, x2, segments);
+        assertEquals(expected, ans, Ex1.EPS);
 
-         p = new double[]{1, 0, 1};
-         x1 = 1;
-         x2 = 3;
-         segments = 2;
-         expected = Math.sqrt(10) + Math.sqrt(26);
-         ans =  Ex1.length(p, x1, x2, segments);
-         assertEquals(expected, ans, Ex1.EPS);
+        p = new double[]{1, 0, 1};
+        x1 = 1;
+        x2 = 3;
+        segments = 2;
+        expected = Math.sqrt(10) + Math.sqrt(26);
+        ans = Ex1.length(p, x1, x2, segments);
+        assertEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
     void area() {
+        double[] p1 = {1};
+        double[] p2 = Ex1.ZERO;
+        double x1 = 0;
+        double x2 = 5;
+        int segments = 10;
+        double expected = 5;
+        double ans = Ex1.area(p1, p2, x1, x2, segments);
+        assertEquals(expected, ans, Ex1.EPS);
+
+        p1 = new double[]{0, 0, 1};
+        p2 = new double[]{0, 0, -1};
+        x1 = -2;
+        x2 = 2;
+        segments = 1_000;
+        expected = 1 / 3 * 4 * 2;
+        ans = Ex1.area(p1, p2, x1, x2, segments);
+        assertEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
     void getPolynomFromString() {
+        String p = "-1.0x^2 +3.0x +2.0";
+        double[] expected = {2, 3, -1};
+        double[] ans = Ex1.getPolynomFromString(p);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
+
+        p = "3x^3 -x";
+        expected = new double[]{0, -1, 0, 3};
+        ans = Ex1.getPolynomFromString(p);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
     }
 
     @Test
     void add() {
+        double[] p1 = {1, 2, 3};
+        double[] p2 = {4, 5, 6};
+        double[] expected = {5, 7, 9};
+        double[] ans = Ex1.add(p1, p2);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
+
+        p1 = Ex1.ZERO;
+        p2 = Ex1.ZERO;
+        expected = Ex1.ZERO;
+        ans = Ex1.add(p1, p2);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
     }
 
     @Test
     void mul() {
+        double[] p1 = {0, 1};
+        double[] p2 = {1, 2, 3};
+        double[] expected = {0, 1, 2, 3};
+        double[] ans = Ex1.mul(p1, p2);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
+
+        p1 = Ex1.ZERO;
+        p2 = new double[]{1, 1, 1};
+        expected = Ex1.ZERO;
+        ans = Ex1.mul(p1, p2);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
     }
 
     @Test
     void derivative() {
+        double[] p = {1, 1, 1, 1};
+        double[] expected = {1, 2, 3};
+        double[] ans = Ex1.derivative(p);
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
+
+        p = Ex1.ZERO;
+        expected = Ex1.ZERO;
+        for (int i = 0; i < ans.length; i++) {
+            assertEquals(expected[i], ans[i], Ex1.EPS);
+        }
     }
 }
