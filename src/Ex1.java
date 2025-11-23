@@ -134,15 +134,51 @@ public class Ex1 {
      * @return String representing the polynomial function:
      */
     public static String poly(double[] poly) {
-        String ans = "";
-        if (poly.length == 0) {
-            ans = "0";
-        } else {
-            /** add you code below
-
-             /////////////////// */
+        if (poly == null || poly.length == 0) {
+            return "0";
         }
-        return ans;
+
+        String[] parts = new String[poly.length];
+        for (int i = 0; i < poly.length; i++) {
+            double coef = poly[i];
+            if (coef == 1) {
+                parts[i] = " +";
+            } else if (coef > 0) {
+                parts[i] = " +" + coef;
+            }else if (coef == -1) {
+                parts[i] = " -";
+            }else if (coef < 0) {
+                parts[i] = " " + coef;
+            } else {
+                parts[i] = "";
+            }
+        }
+
+        if (parts.length > 1 && parts[1] != "") {
+            parts[1] += "x";
+        }
+
+        for (int i = 2; i < parts.length; i++) {
+            String coef = parts[i];
+            if (coef != "") {
+                parts[i] += "x^" + i;
+            }
+        }
+
+        String ans = "";
+        for (int i = parts.length - 1; i >= 0; i--) {
+            ans += parts[i];
+        }
+
+        if (ans == "") {
+            return "0";
+        }
+
+        if (ans.charAt(1) == '+') {
+            return ans.substring(2);
+        }
+
+        return ans.substring(1);
     }
 
     /**

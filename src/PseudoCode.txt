@@ -53,10 +53,16 @@ if (poly==null || poly.length==0):
 String[] parts = new String[poly.length]
 for (int i=0; i<poly.length; i++):
     double coef = poly[i]
-    if (coef>0):
+    if (coef==1):
+        parts[i] = " +" //so we have +x, instead of +1.0x
+    elif (coef>0):
         parts[i] = " +" + coef
+    elif (coef==-1):
+            parts[i] = " -" //so we have -x, instead of +1.0x
     elif (coef<0):
         parts[i] = " " + coef
+    else:
+        parts[i] = ""
 
 if (parts.length>1 && parts[1]!=""):
     parts[1] += "x"
@@ -71,9 +77,12 @@ for (int i=parts.length-1; i>=0; i--):
     ans += parts[i]
 
 if (ans==""):
-    ans = "0"
+    return "0"
 
-return ans
+if (ans.charAt(1) == "+"):
+    return ans.substring(2) //to remove the leading space and plus
+
+return ans.substring(1)
 
 
 //FUNCTION 4
