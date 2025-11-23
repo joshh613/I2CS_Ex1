@@ -244,10 +244,22 @@ public class Ex1 {
      * @return the approximated area between the two polynomial functions within the [x1,x2] range.
      */
     public static double area(double[] p1, double[] p2, double x1, double x2, int numberOfTrapezoid) {
-        double ans = 0;
-        /** add you code below
+        double[] p = add(p1, neg(p2));
 
-         /////////////////// */
+        double width = (x2-x1)/numberOfTrapezoid;
+        double x = x1;
+        double a = f(p, x);
+
+        double ans = 0;
+        for (int i=0; i<numberOfTrapezoid; i++) {
+            x += width;
+            double b = f(p, x);
+            double temp = (a + b) * width / 2;
+            ans += Math.abs(temp);
+
+            a = b;
+        }
+
         return ans;
     }
 
