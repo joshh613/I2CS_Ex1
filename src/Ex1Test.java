@@ -319,6 +319,21 @@ class Ex1Test {
 
     @Test
     void length() {
+         double[] p = {0, 1};
+         double x1 = 0;
+         double x2 = 1;
+         int segments = 1;
+         double expected = Math.sqrt(2);
+         double ans = Ex1.length(p, x1, x2, segments);
+         assertEquals(expected, ans, Ex1.EPS);
+
+         p = new double[]{1, 0, 1};
+         x1 = 1;
+         x2 = 3;
+         segments = 2;
+         expected = Math.sqrt(10) + Math.sqrt(26);
+         ans =  Ex1.length(p, x1, x2, segments);
+         assertEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
