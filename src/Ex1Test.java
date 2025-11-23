@@ -291,7 +291,7 @@ class Ex1Test {
         assertEquals(expected, ans);
 
         p = new double[]{3, 2, 1};
-        expected = "x^2 +x +1.0";
+        expected = "x^2 +2.0x +3.0";
         ans = Ex1.poly(p);
         assertEquals(expected, ans);
     }
