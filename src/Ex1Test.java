@@ -249,7 +249,7 @@ class Ex1Test {
         double[] yy = {1, 4, 9};
         double[] expected = {0, 0, 1};
         double[] ans = Ex1.PolynomFromPoints(xx, yy);
-        for (int i = 0; i < ans.length; i = i + 1) {
+        for (int i = 0; i < ans.length; i++) {
             assertEquals(ans[i], expected[i], Ex1.EPS);
         }
 
@@ -257,21 +257,64 @@ class Ex1Test {
         yy = new double[]{1, 6};
         expected = new double[]{1, 5};
         ans = Ex1.PolynomFromPoints(xx, yy);
-        for (int i = 0; i < ans.length; i = i + 1) {
+        for (int i = 0; i < ans.length; i++) {
             assertEquals(ans[i], expected[i], Ex1.EPS);
         }
     }
 
     @Test
-    void testEquals1() {
+    void equals() {
+         double[] p1 = {1, 2, 3};
+         double[] p2 = {4, 5, 6};
+         boolean ans = Ex1.equals(p1, p2);
+         assertFalse(ans);
+
+         p1 = new double[]{1, 1, 1};
+         p2 = new double[]{0, 0};
+         ans = Ex1.equals(p1, p2);
+         assertFalse(ans);
+
+         p1 = new double[]{2, 3, 2};
+         p2 = new double[]{2, 3, 2};
+         ans = Ex1.equals(p1, p2);
+         assertTrue(ans);
+
+        p1 = new double[]{3, 2, 1};
+        p2 = new double[]{6, 4, 2};
+        ans = Ex1.equals(p1, p2);
+        assertTrue(ans);
     }
 
     @Test
     void poly() {
+         double[] p = {2, 0, 3.1, -1.2};
+         String expected = "-1.2x^3 +3.1x^2 +2.0";
+         String ans = Ex1.poly(p);
+         assertEquals(expected, ans);
+
+         p = new double[]{3, 2, 1};
+         expected = "x^2 +x +1.0";
+         ans =  Ex1.poly(p);
+         assertEquals(expected, ans);
     }
 
     @Test
     void sameValue() {
+         double[] p1 = {0, 1};
+         double[] p2 = {0, 0, 1};
+         double x1 = -1;
+         double x2 = 1;
+         double expected = 0;
+         double ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
+         assertEquals(expected, ans, Ex1.EPS);
+
+         p1 = new double[]{1, 1};
+         p2 = new double[]{0, -1, 1};
+         x1 = -5;
+         x2 = 0;
+         expected = -1;
+         ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
+         assertEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
