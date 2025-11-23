@@ -10,16 +10,16 @@ if (lx!=ly):
     return null
 
 if (lx==2):
-    double b = (y[1]-y[0]) / (x[1]-x[0]) //TODO: check we aren't diving by zero
-    double a = y[0] - b*x[0]
+    double b = (y[1]-y[0]) / (xx[1]-xx[0]) //TODO: check we aren't diving by zero
+    double a = y[0] - b*xx[0]
 
     return new double[]{a, b}
 
 if (lx==3):
-    double denom = (x[0] - x[1])*(x[0] - x[2])*(x[1] - x[2])
-    double a = (x[2] * (y[1] - y[0]) + x[1] * (y[0] - y[2]) + x[0] * (y[2] - y[1])) / denom
-    double b = (x[2] * x[2] * (y[0] - y[1]) + x[1] * x[1] * (y[2] - y[0]) + x[0] * x[0] * (y[1] - y[2])) / denom
-    double c = (x[1] * x[2] * (x[1] - x[2]) * y[0] + x[2] * x[0] * (x[2] - x[0]) * y[1] + x[0] * x[1] * (x[0] - x[1]) * y[2]) / denom
+    double denom = (xx[0] - xx[1])*(xx[0] - xx[2])*(xx[1] - xx[2])
+    double a = (xx[1] * xx[2] * (xx[1] - xx[2]) * y[0] + xx[2] * xx[0] * (xx[2] - xx[0]) * y[1] + xx[0] * xx[1] * (xx[0] - xx[1]) * y[2]) / denom
+    double b = (xx[2] * xx[2] * (y[0] - y[1]) + xx[1] * xx[1] * (y[2] - y[0]) + xx[0] * xx[0] * (y[1] - y[2])) / denom
+    double c = (xx[2] * (y[1] - y[0]) + xx[1] * (y[0] - y[2]) + xx[0] * (y[2] - y[1])) / denom
 
     return new double[]{a, b, c}
 

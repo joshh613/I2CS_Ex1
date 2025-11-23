@@ -249,9 +249,7 @@ class Ex1Test {
         double[] yy = {1, 4, 9};
         double[] expected = {0, 0, 1};
         double[] ans = Ex1.PolynomFromPoints(xx, yy);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(ans[i], expected[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
 
         xx = new double[]{0, 1};
         yy = new double[]{1, 6};
