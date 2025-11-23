@@ -306,7 +306,7 @@ class Ex1Test {
         double ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
         assertEquals(expected, ans, Ex1.EPS);
 
-        p1 = new double[]{1, 1};
+        p1 = new double[]{1, 0, 1};
         p2 = new double[]{0, -1, 1};
         x1 = -5;
         x2 = 0;
