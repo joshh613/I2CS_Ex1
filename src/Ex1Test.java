@@ -417,4 +417,43 @@ class Ex1Test {
         double[] ans = Ex1.neg(p);
         assertArrayEquals(expected, ans, Ex1.EPS);
     }
+
+    @Test
+    void ensureDigit(){
+         String s = "+3.5x";
+         String expected = "+3.5x";
+         String ans = Ex1.ensureDigit(s);
+         assertEquals(expected, ans);
+
+         s = "+x^2";
+         expected = "+1.0x^2";
+         ans = Ex1.ensureDigit(s);
+         assertEquals(expected, ans);
+    }
+
+    @Test
+    void lastCharIs(){
+        String s = "abcde";
+        char c = 'e';
+        boolean ans =  Ex1.lastCharIs(s, c);
+        assertTrue(ans);
+
+        s = "test";
+        c = 'x';
+        ans =  Ex1.lastCharIs(s, c);
+        assertFalse(ans);
+    }
+
+    @Test
+    void dropLastChar(){
+        String s = "hello";
+        String expected = "hell";
+        String ans = Ex1.dropLastChar(s);
+        assertEquals(expected, ans);
+
+        s = "1234";
+        expected = "123";
+        ans = Ex1.dropLastChar(s);
+        assertEquals(expected, ans);
+    }
 }

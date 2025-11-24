@@ -343,4 +343,20 @@ public class Ex1 {
 
         return ans;
     }
+
+    public static String ensureDigit(String s) {
+        if (s.charAt(1) == 'x') {
+            return s.charAt(0) + "1.0" + s.substring(1);
+        }
+
+        return s;
+    }
+
+    public static boolean lastCharIs(String s, char c) {
+        return s.charAt(s.length() - 1) == c;
+    }
+
+    public static String dropLastChar(String s) {
+        return s.substring(0, s.length() - 1);
+    }
 }
