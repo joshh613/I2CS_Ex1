@@ -145,9 +145,9 @@ public class Ex1 {
                 parts[i] = " +";
             } else if (coef > 0) {
                 parts[i] = " +" + coef;
-            }else if (coef == -1) {
+            } else if (coef == -1) {
                 parts[i] = " -";
-            }else if (coef < 0) {
+            } else if (coef < 0) {
                 parts[i] = " " + coef;
             } else {
                 parts[i] = "";
@@ -193,7 +193,7 @@ public class Ex1 {
      * @return an x value (x1<=x<=x2) for which |p1(x) - p2(x)| < eps.
      */
     public static double sameValue(double[] p1, double[] p2, double x1, double x2, double eps) {
-        if (p1==null || p2==null) {
+        if (p1 == null || p2 == null) {
             return -1;
         }
 
@@ -218,9 +218,9 @@ public class Ex1 {
         double ans = 0;
 
         double width = (x2 - x1) / numberOfSegments;
-        double widthSquared = width*width;
+        double widthSquared = width * width;
 
-        for (int i=0; i<numberOfSegments; i++) {
+        for (int i = 0; i < numberOfSegments; i++) {
             double startX = x1 + width * i;
             double endX = startX + width;
             double height = f(p, endX) - f(p, startX);
@@ -246,12 +246,12 @@ public class Ex1 {
     public static double area(double[] p1, double[] p2, double x1, double x2, int numberOfTrapezoid) {
         double[] p = add(p1, neg(p2));
 
-        double width = (x2-x1)/numberOfTrapezoid;
+        double width = (x2 - x1) / numberOfTrapezoid;
         double x = x1;
         double a = f(p, x);
 
         double ans = 0;
-        for (int i=0; i<numberOfTrapezoid; i++) {
+        for (int i = 0; i < numberOfTrapezoid; i++) {
             x += width;
             double b = f(p, x);
             double temp = (a + b) * width / 2;
@@ -287,15 +287,15 @@ public class Ex1 {
      * @return p1+p2
      */
     public static double[] add(double[] p1, double[] p2) {
-        if (p1==null || p2==null) {
+        if (p1 == null || p2 == null) {
             return null;
         }
 
         double[] ans = new double[Math.max(p1.length, p2.length)];
-        for (int i=0; i<p1.length; i++) {
+        for (int i = 0; i < p1.length; i++) {
             ans[i] = p1[i];
         }
-        for (int i=0; i<p2.length; i++) {
+        for (int i = 0; i < p2.length; i++) {
             ans[i] += p2[i];
         }
 
@@ -332,12 +332,12 @@ public class Ex1 {
     }
 
     public static double[] neg(double[] p) {
-        if (p==null || p.length==0) {
+        if (p == null || p.length == 0) {
             return null;
         }
 
         double[] ans = new double[p.length];
-        for (int i=0; i<p.length; i++) {
+        for (int i = 0; i < p.length; i++) {
             ans[i] = -p[i];
         }
 
