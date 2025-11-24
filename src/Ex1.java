@@ -272,10 +272,42 @@ public class Ex1 {
      * @return the array representing polynomial p
      */
     public static double[] getPolynomFromString(String p) {
-        double[] ans = ZERO;//  -1.0x^2 +3.0x +2.0
-        /** add you code below
+        String[] parts = p.split(" ");
 
-         /////////////////// */
+        if (parts[0].charAt(0) != '-') {
+            parts[0] = "+" + parts[0];
+        }
+
+        int highestPower = 0;
+        for (int i = 0; i < parts.length; i++) {
+            String[] temp = parts[i].split("\\^");
+            if (temp.length > 1) {
+                highestPower = Math.max(highestPower, Integer.parseInt(temp[1]));
+            } else {
+                if (lastCharIs(temp[0], 'x')) {
+                    highestPower = Math.max(highestPower, 1);
+                }
+            }
+        }
+
+        double[] ans = new double[highestPower + 1];
+
+        for (int i = 0; i < parts.length; i++) {
+            String[] temp = parts[i].split("\\^");
+
+            if (temp.length > 1) {
+                temp[0] = dropLastChar(ensureDigit(temp[0]));
+                ans[Integer.parseInt(temp[1])] = Double.parseDouble(temp[0]);
+            } else {
+                if (lastCharIs(temp[0], 'x')) {
+                    temp[0] = dropLastChar(ensureDigit(temp[0]));
+                    ans[1] = Double.parseDouble(temp[0]);
+                } else {
+                    ans[0] = Double.parseDouble(temp[0]);
+                }
+            }
+        }
+
         return ans;
     }
 
