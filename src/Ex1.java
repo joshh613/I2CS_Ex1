@@ -342,10 +342,23 @@ public class Ex1 {
      * @return p1*p2
      */
     public static double[] mul(double[] p1, double[] p2) {
-        double[] ans = ZERO;//
-        /** add you code below
+        if (p1 == null || p2 == null || p1.length == 0 || p2.length == 0) {
+            return null;
+        }
 
-         /////////////////// */
+        if (p1 == ZERO || p2 == ZERO) {
+            return ZERO;
+        }
+
+
+        double[] ans = new double[p1.length + p2.length -1];
+
+        for (int i = 0; i < p1.length; i++) {
+            for (int j = 0; j < p2.length; j++) {
+                ans[i + j] += p1[i] * p2[j];
+            }
+        }
+
         return ans;
     }
 
