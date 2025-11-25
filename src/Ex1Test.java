@@ -407,6 +407,7 @@ class Ex1Test {
 
         p = Ex1.ZERO;
         expected = Ex1.ZERO;
+        ans = Ex1.derivative(p);
         assertArrayEquals(expected, ans, Ex1.EPS);
     }
 
