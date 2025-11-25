@@ -351,7 +351,7 @@ public class Ex1 {
         }
 
 
-        double[] ans = new double[p1.length + p2.length -1];
+        double[] ans = new double[p1.length + p2.length - 1];
 
         for (int i = 0; i < p1.length; i++) {
             for (int j = 0; j < p2.length; j++) {
@@ -369,10 +369,20 @@ public class Ex1 {
      * @return d/dx (po)
      */
     public static double[] derivative(double[] po) {
-        double[] ans = ZERO;//
-        /** add you code below
+        if (po == null || po.length == 0) {
+            return null;
+        }
 
-         /////////////////// */
+        if (po.length == 1) {
+            return ZERO;
+        }
+
+        double[] ans = new double[po.length - 1];
+
+        for (int i = 1; i < po.length; i++) {
+            ans[i - 1] = po[i] * i;
+        }
+
         return ans;
     }
 
