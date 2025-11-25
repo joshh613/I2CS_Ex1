@@ -191,6 +191,9 @@ double[] mul(double[] p1, p2):
 if (p1==null || p2==null || p1.length==0 || p2.length==0):
     return null
 
+if (p1==ZERO || p2==zero):
+    return ZERO
+
 double[] ans = new double[p1.length+p2.length-1]
 
 for (int i=0; i<p1.length; i++):
