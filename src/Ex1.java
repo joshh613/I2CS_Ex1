@@ -245,20 +245,14 @@ public class Ex1 {
      */
     public static double area(double[] p1, double[] p2, double x1, double x2, int numberOfTrapezoid) {
         double[] p = add(p1, neg(p2));
-
         double width = (x2 - x1) / numberOfTrapezoid;
-        double x = x1;
-        double a = f(p, x);
 
-        double ans = 0;
-        for (int i = 0; i < numberOfTrapezoid; i++) {
-            x += width;
-            double b = f(p, x);
-            double temp = (a + b) * width / 2;
-            ans += Math.abs(temp);
-
-            a = b;
+        double ans=0, left=x1, right=x1+width;
+        for ( ; right<x2; right+=width, left+=width) {
+            ans += calcArea(p, left, right, width);
         }
+
+        ans += calcArea(p, left, x2, width);
 
         return ans;
     }
@@ -413,5 +407,34 @@ public class Ex1 {
 
     public static String dropLastChar(String s) {
         return s.substring(0, s.length() - 1);
+    }
+
+    public static boolean changeOfSign(double[] p, double left, double right) {
+        boolean signL = f(p, left) > 0;
+        boolean signR = f(p, right) > 0;
+
+        return signL != signR;
+    }
+
+    public static double calcArea(double[] p, double left, double right, double width) {
+        double area = 0;
+
+        if (changeOfSign(p, left, right)) {
+            double root = root_rec(p, left, right, EPS);
+
+            double b = left - root;
+            double h = f(p, left);
+            area += Math.abs(b * h / 2);
+
+            b = root - right;
+            h = f(p, right);
+            area += Math.abs(b * h / 2);
+
+        } else {
+            double sum = f(p, left) + f(p, right);
+            area += Math.abs(sum * width / 2);
+        }
+
+        return area;
     }
 }
