@@ -248,8 +248,8 @@ public class Ex1 {
         double[] p = add(p1, neg(p2));
         double width = (x2 - x1) / numberOfTrapezoid;
 
-        double ans=0, left=x1, right=x1+width;
-        for ( ; right<x2; right+=width, left+=width) {
+        double ans = 0, left = x1, right = x1 + width;
+        for (; right < x2; right += width, left += width) {
             ans += calcArea(p, left, right, width);
         }
 
