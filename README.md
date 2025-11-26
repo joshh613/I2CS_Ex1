@@ -33,9 +33,9 @@ The following is a screenshot of the output of `Ex1_GUI`:
 - [x] Write pseudocode for all the functions
 - [x] Implement tests for all functions
 - [x] Actually write the code
-- [ ] Write documentation
-- [ ] Write README
-- [ ] Add screenshot
+- [x] Write documentation
+- [x] Write README
+- [x] Add screenshot
 
 ## Personal notes
 
