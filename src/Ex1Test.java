@@ -494,4 +494,155 @@ class Ex1Test {
         ans = Ex1.calcArea(p, x1, x2, x2-x1);
         assertEquals(expected, ans, Ex1.EPS);
     }
+
+    //EDGE CASES
+
+    @Test
+    void f_edgeCases() {
+        //ZERO
+        assertEquals(0.0, Ex1.f(Ex1.ZERO, 10), Ex1.EPS);
+        assertEquals(0.0, Ex1.f(Ex1.ZERO, -3.5), Ex1.EPS);
+
+        //Higher degrees
+        double[] p = {1, -1, 1, -1, 1};
+        double x = 2;
+        double expected = 1 - 2 + 4 - 8 + 16;
+        assertEquals(expected, Ex1.f(p, x), Ex1.EPS);
+    }
+
+    @Test
+    void root_rec_edgeCases() {
+        //At endpoint
+        double[] p = {-4, 1};
+        double ans = Ex1.root_rec(p, 0, 4, Ex1.EPS);
+        assertEquals(4.0, ans, Ex1.EPS);
+
+        //Other side
+        ans = Ex1.root_rec(p, 4, 10, Ex1.EPS);
+        assertEquals(4.0, ans, Ex1.EPS);
+
+        //Two roots
+        p = new double[]{-4, 0, 1}; //roots at -2 and 2
+        ans = Ex1.root_rec(p, -3, 3, Ex1.EPS);
+        double fAtAns = Ex1.f(p, ans);
+        assertTrue(Math.abs(fAtAns) < Ex1.EPS);
+
+        //Linear
+        p = new double[]{2, -3}; //root at -3x + 2 = 0
+        ans = Ex1.root_rec(p, 0, 1, Ex1.EPS);
+        assertEquals(2.0 / 3.0, ans, Ex1.EPS);
+    }
+
+    @Test
+    void polynomFromPoints_edgeCases() {
+        //null
+        assertNull(Ex1.PolynomFromPoints(null, new double[]{1, 2}));
+        assertNull(Ex1.PolynomFromPoints(new double[]{1, 2}, null));
+
+        //Length mismatch
+        assertNull(Ex1.PolynomFromPoints(new double[]{1, 2}, new double[]{1}));
+
+        //Three points of linear function (y = 2x + 1)
+        double[] xx = {0, 1, 2};
+        double[] yy = {1, 3, 5};
+        double[] expected = {1, 2, 0};
+        double[] ans = Ex1.PolynomFromPoints(xx, yy);
+        assertArrayEquals(expected, ans, Ex1.EPS);
+
+        //More than three points
+        xx = new double[]{0, 1, 2, 3};
+        yy = new double[]{1, 2, 3, 4};
+        assertNull(Ex1.PolynomFromPoints(xx, yy));
+    }
+
+    @Test
+    void equals_edgeCases() {
+        //Trailing zeros
+        double[] p1 = {1, 2, 3, 0, 0};
+        double[] p2 = {1, 2, 3};
+        assertTrue(Ex1.equals(p1, p2));
+
+        //null
+        assertTrue(Ex1.equals(null, null));
+        assertFalse(Ex1.equals(null, new double[]{0}));
+        assertFalse(Ex1.equals(new double[]{0}, null));
+    }
+
+    @Test
+    void poly_edgeCases() {
+        //ZERO
+        assertEquals("0", Ex1.poly(Ex1.ZERO));
+
+        //Higher degree zero
+        double[] p = {0, 0, 0};
+        assertEquals("0", Ex1.poly(p));
+
+        //Constant positive/negative
+        p = new double[]{5};
+        assertEquals("5.0", Ex1.poly(p));
+        p = new double[]{-2};
+        assertEquals("-2.0", Ex1.poly(p));
+
+        //Single x term
+        p = new double[]{0, 3};
+        assertEquals("3.0x", Ex1.poly(p));
+
+        //Single x^k term
+        p = new double[]{0, 0, -4};
+        assertEquals("-4.0x^2", Ex1.poly(p));
+    }
+
+    @Test
+    void sameValue_edgeCases() {
+        //Identical polynomials
+        double[] p1 = {1, 2, 3};
+        double[] p2 = {1, 2, 3};
+        double x1 = -10;
+        double x2 = 10;
+        double ans = Ex1.sameValue(p1, p2, x1, x2, Ex1.EPS);
+        assertTrue(Double.isFinite(ans)); //some answer was reached
+
+        //null
+        assertEquals(-1.0, Ex1.sameValue(null, p2, 0, 1, Ex1.EPS));
+        assertEquals(-1.0, Ex1.sameValue(p1, null, 0, 1, Ex1.EPS));
+    }
+
+    @Test
+    void length_edgeCases() {
+        //ZERO
+        double[] p = Ex1.ZERO;
+        assertEquals(5.0, Ex1.length(p, 0, 5, 10), Ex1.EPS);
+        assertEquals(2.0, Ex1.length(p, -1, 1, 4), Ex1.EPS);
+
+        //Linear function
+        p = new double[]{0, 2};
+        double length1 = Ex1.length(p, 0, 1, 1);
+        double length10 = Ex1.length(p, 0, 1, 10);
+        assertEquals(Math.sqrt(5), length1, Ex1.EPS);
+        assertEquals(Math.sqrt(5), length10, Ex1.EPS);
+
+        //Small interval
+        p = new double[]{1, 1, 1};
+        double ans = Ex1.length(p, 1.0, 1.001, 10);
+        assertTrue(ans > 0);
+    }
+
+    @Test
+    void area_edgeCases() {
+        //Same polynomial
+        double[] p1 = {1, -2, 3};
+        assertEquals(0.0, Ex1.area(p1, p1, -5, 5, 100), Ex1.EPS);
+
+        //Symmetry
+        double[] p2 = {0, 1};
+        double a1 = Ex1.area(p1, p2, -2, 3, 100);
+        double a2 = Ex1.area(p2, p1, -2, 3, 100);
+        assertEquals(a1, a2, Ex1.EPS);
+
+        //Multiple intersections
+        p1 = new double[]{0, 0, 0, 1};
+        p2 = Ex1.ZERO;
+        double area = Ex1.area(p1, p2, -2, 2, 1000);
+        assertTrue(area > 0);
+    }
 }
