@@ -220,12 +220,12 @@ class Ex1Test {
         double[] poly = {0, 0, 1};
         double x = 4;
         double ans = Ex1.f(poly, x);
-        assertEquals(ans, x * x, Ex1.EPS);
+        assertEquals(x * x, ans, Ex1.EPS);
 
         poly = new double[]{3, 5, 0};
         x = 2;
         ans = Ex1.f(poly, x);
-        assertEquals(ans, 3 + x * poly[1], Ex1.EPS);
+        assertEquals(3 + x * poly[1], ans, Ex1.EPS);
     }
 
     @Test
@@ -234,13 +234,13 @@ class Ex1Test {
         double x1 = -4;
         double x2 = 4;
         double ans = Ex1.root_rec(poly, x1, x2, Ex1.EPS);
-        assertEquals(ans, 0, Ex1.EPS);
+        assertEquals(0, ans, Ex1.EPS);
 
         poly = new double[]{-8, 0, 2};
         x1 = 1;
         x2 = 10;
         ans = Ex1.root_rec(poly, x1, x2, Ex1.EPS);
-        assertEquals(ans, 2, Ex1.EPS);
+        assertEquals(2, ans, Ex1.EPS);
     }
 
     @Test
@@ -255,9 +255,7 @@ class Ex1Test {
         yy = new double[]{1, 6};
         expected = new double[]{1, 5};
         ans = Ex1.PolynomFromPoints(xx, yy);
-        for (int i = 0; i < ans.length; i++) {
-            assertEquals(ans[i], expected[i], Ex1.EPS);
-        }
+        assertArrayEquals(expected, ans, Ex1.EPS);
     }
 
     @Test
@@ -468,7 +466,7 @@ class Ex1Test {
 
          p = new double[]{0, 0, 1};
          x1 = 1;
-         x2 = 2;
+         x2 = 3;
          ans = Ex1.changeOfSign(p, x1, x2);
          assertFalse(ans);
     }
