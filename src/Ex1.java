@@ -378,6 +378,11 @@ public class Ex1 {
         return ans;
     }
 
+    /**
+     * Negates a given polynomial (i.e. multiplies by -1.)
+     * @param p polynomial array
+     * @return -p (the negative of the input polynomial)
+     */
     public static double[] neg(double[] p) {
         if (p == null || p.length == 0) {
             return null;
@@ -391,6 +396,11 @@ public class Ex1 {
         return ans;
     }
 
+    /**
+     * If the coefficient is '+x' or '-x' (etc.), we want to add '1' to the beginning (i.e. '-1x' or '+1x'.)
+     * @param s coefficient string (of the form 'sign'+'x'+'^power (optional)')
+     * @return string that is guaranteed to have a digit as its second character
+     */
     public static String ensureDigit(String s) {
         if (s.charAt(1) == 'x') {
             return s.charAt(0) + "1.0" + s.substring(1);
@@ -399,14 +409,32 @@ public class Ex1 {
         return s;
     }
 
+    /**
+     * Checks if the last character of a string is equal to a given char
+     * @param s string to check
+     * @param c char to check against
+     * @return true if the last character is indeed 'c'
+     */
     public static boolean lastCharIs(String s, char c) {
         return s.charAt(s.length() - 1) == c;
     }
 
+    /**
+     * Removes the last character of a string
+     * @param s string (at least length 1)
+     * @return a new string which terminates one character earlier than the input string
+     */
     public static String dropLastChar(String s) {
         return s.substring(0, s.length() - 1);
     }
 
+    /**
+     * Indicates whether the function crosses the x-axis in a given interval.
+     * @param p polynomial (lowest power to highest)
+     * @param left start point
+     * @param right end point
+     * @return true if there is a change of sign
+     */
     public static boolean changeOfSign(double[] p, double left, double right) {
         boolean signL = f(p, left) > 0;
         boolean signR = f(p, right) > 0;
@@ -414,6 +442,14 @@ public class Ex1 {
         return signL != signR;
     }
 
+    /**
+     * Calculates the area (trapezoid or two triangles) under a curve, based on whether there is a change of sign.
+     * @param p polynomial (lowest power to highest)
+     * @param left start point
+     * @param right end point
+     * @param width equal to 'right minus left'
+     * @return area between left and right
+     */
     public static double calcArea(double[] p, double left, double right, double width) {
         double area = 0;
 
