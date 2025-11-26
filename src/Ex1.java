@@ -22,9 +22,9 @@ public class Ex1 {
     /**
      * Computes the f(x) value of the polynomial function at x.
      *
-     * @param poly - polynomial function
-     * @param x    - value at which to evaluate
-     * @return f(x) - the polynomial function value at x.
+     * @param poly polynomial array (ascending powers)
+     * @param x    value at which to evaluate
+     * @return f(x), the polynomial function value at x.
      */
     public static double f(double[] poly, double x) {
         double ans = 0;
@@ -41,10 +41,10 @@ public class Ex1 {
      * assuming p(x1)*p(x2) <= 0. (i.e. one is above y=0 and one is below)
      * This function should be implemented recursively.
      *
-     * @param p   - the polynomial function
-     * @param x1  - minimal value of the range
-     * @param x2  - maximal value of the range
-     * @param eps - epsilon (positive small value (often 10^-3, or 10^-6).
+     * @param p   the polynomial function
+     * @param x1  minimal value of the range
+     * @param x2  maximal value of the range
+     * @param eps epsilon (positive small value (often 10^-3, or 10^-6).
      * @return an x value (x1<=x<=x2) for which |p(x)| < eps.
      */
     public static double root_rec(double[] p, double x1, double x2, double eps) {
@@ -185,11 +185,11 @@ public class Ex1 {
      * Given two polynomial functions (p1,p2), a range [x1,x2] and an epsilon eps. This function computes an x value (x1<=x<=x2)
      * for which |p1(x) -p2(x)| < eps, assuming (p1(x1)-p2(x1)) * (p1(x2)-p2(x2)) <= 0.
      *
-     * @param p1  - first polynomial function
-     * @param p2  - second polynomial function
-     * @param x1  - minimal value of the range
-     * @param x2  - maximal value of the range
-     * @param eps - epsilon (positive small value (often 10^-3, or 10^-6).
+     * @param p1  first polynomial function
+     * @param p2  second polynomial function
+     * @param x1  minimal value of the range
+     * @param x2  maximal value of the range
+     * @param eps epsilon (positive small value (often 10^-3, or 10^-6).
      * @return an x value (x1<=x<=x2) for which |p1(x) - p2(x)| < eps.
      */
     public static double sameValue(double[] p1, double[] p2, double x1, double x2, double eps) {
@@ -206,12 +206,12 @@ public class Ex1 {
      * This function computes an approximation of the length of the function between f(x1) and f(x2)
      * using n inner sample points and computing the segment-path between them.
      * assuming x1 < x2.
-     * This function should be implemented iteratively (none recursive).
+     * This function has been implemented iteratively (not recursively.)
      *
-     * @param p                - the polynomial function
-     * @param x1               - minimal value of the range
-     * @param x2               - maximal value of the range
-     * @param numberOfSegments - (A positive integer value (1,2,...).
+     * @param p                the polynomial function
+     * @param x1               minimal value of the range
+     * @param x2               maximal value of the range
+     * @param numberOfSegments (A positive integer value (1,2,...).
      * @return the length approximation of the function between f(x1) and f(x2).
      */
     public static double length(double[] p, double x1, double x2, int numberOfSegments) {
@@ -232,9 +232,10 @@ public class Ex1 {
     }
 
     /**
-     * Given two polynomial functions (p1,p2), a range [x1,x2] and an integer representing the number of Trapezoids between the functions (number of samples on each polynom).
-     * This function computes an approximation of the area between the polynomial functions within the x-range.
-     * The area is computed using a Riemann-like integral (https://en.wikipedia.org/wiki/Riemann_integral)
+     * Computer the (non-signed) area the polynomials (p1, p2), within the range [x1, x2].
+     * <p>
+     * At least {@code numberOfTrapezoid} sections will be used. If necessary (when the polynomials intersect), a section will be broken
+     * into two. In that case, the area of two triangles will be calculated. Otherwise, the area of a trapezoid with be calculated.
      *
      * @param p1                - first polynomial function
      * @param p2                - second polynomial function
@@ -262,7 +263,7 @@ public class Ex1 {
      * representation. Note: given a polynomial function represented as a double array,
      * getPolynomFromString(poly(p)) should return an array equals to p.
      *
-     * @param p - a String representing polynomial function.
+     * @param p a String representing polynomial function
      * @return the array representing polynomial p
      */
     public static double[] getPolynomFromString(String p) {
@@ -306,11 +307,11 @@ public class Ex1 {
     }
 
     /**
-     * This function computes the polynomial function which is the sum of two polynomial functions (p1,p2)
+     * This function computes the polynomial function which is the sum of two polynomial functions (p1,p2).
      *
      * @param p1 first polynomial
      * @param p2 second polynomial
-     * @return p1+p2
+     * @return p1+p2 (or {@code null} if either input is {@code null})
      */
     public static double[] add(double[] p1, double[] p2) {
         if (p1 == null || p2 == null) {
@@ -327,11 +328,11 @@ public class Ex1 {
     }
 
     /**
-     * This function computes the polynomial function which is the multiplication of two polynoms (p1,p2)
+     * This function computes the polynomial function which is the multiplication of two polynomials (p1,p2)
      *
      * @param p1 first polynomial
      * @param p2 second polynomial
-     * @return p1*p2
+     * @return p1*p2 (or {@link #ZERO} if either input is {@link #ZERO}, or {@code null} if either input is {@code null})
      */
     public static double[] mul(double[] p1, double[] p2) {
         if (p1 == null || p2 == null || p1.length == 0 || p2.length == 0) {
@@ -355,10 +356,10 @@ public class Ex1 {
     }
 
     /**
-     * This function computes the derivative of the p0 polynomial function.
+     * This function computes the derivative of the p0 polynomial function. It will return {@link #ZERO} if the polynomial is a constant function.
      *
      * @param po polynomial to calculate its derivative
-     * @return d/dx (po)
+     * @return d/dx (po) (or {@code null} if po is {@code null})
      */
     public static double[] derivative(double[] po) {
         if (po == null || po.length == 0) {
@@ -380,8 +381,9 @@ public class Ex1 {
 
     /**
      * Negates a given polynomial (i.e. multiplies by -1.)
+     *
      * @param p polynomial array
-     * @return -p (the negative of the input polynomial)
+     * @return a new array equivalent to -p (or {@code null} if p is {@code null})
      */
     public static double[] neg(double[] p) {
         if (p == null || p.length == 0) {
@@ -397,9 +399,12 @@ public class Ex1 {
     }
 
     /**
-     * If the coefficient is '+x' or '-x' (etc.), we want to add '1' to the beginning (i.e. '-1x' or '+1x'.)
+     * Ensures that the coefficient string includes an explicit numeric magnitude.
+     * <p>
+     * If the coefficient is '+x' or '-x' (etc.), we add '1' to the beginning (i.e. '-1x' or '+1x'.)
+     *
      * @param s coefficient string (of the form 'sign'+'x'+'^power (optional)')
-     * @return string that is guaranteed to have a digit as its second character
+     * @return string whose second character is a digit
      */
     public static String ensureDigit(String s) {
         if (s.charAt(1) == 'x') {
@@ -411,18 +416,20 @@ public class Ex1 {
 
     /**
      * Checks if the last character of a string is equal to a given char
+     *
      * @param s string to check
      * @param c char to check against
-     * @return true if the last character is indeed 'c'
+     * @return {@code true} if the last character is indeed {@code char c}
      */
     public static boolean lastCharIs(String s, char c) {
         return s.charAt(s.length() - 1) == c;
     }
 
     /**
-     * Removes the last character of a string
+     * Creates a copy of the input String, without its last character.
+     *
      * @param s string (at least length 1)
-     * @return a new string which terminates one character earlier than the input string
+     * @return a new String which terminates one character earlier than the input string
      */
     public static String dropLastChar(String s) {
         return s.substring(0, s.length() - 1);
@@ -430,10 +437,13 @@ public class Ex1 {
 
     /**
      * Indicates whether the function crosses the x-axis in a given interval.
-     * @param p polynomial (lowest power to highest)
-     * @param left start point
+     * <p>
+     * i.e. we calculate p(left) and p(right) and see if their signs match.
+     *
+     * @param p     polynomial (lowest power to highest)
+     * @param left  start point
      * @param right end point
-     * @return true if there is a change of sign
+     * @return {@code true} if there is a change of sign
      */
     public static boolean changeOfSign(double[] p, double left, double right) {
         boolean signL = f(p, left) > 0;
@@ -443,9 +453,14 @@ public class Ex1 {
     }
 
     /**
-     * Calculates the area (trapezoid or two triangles) under a curve, based on whether there is a change of sign.
-     * @param p polynomial (lowest power to highest)
-     * @param left start point
+     * Approximate the (absolute) area under polynomial {@code p}, between x=left and x=right.
+     * <p>
+     * If the polynomial changes sign in this range, we calculate the area as two triangles (A=bh/2).
+     * <p>
+     * Otherwise, we calculate the area as a trapezoid (A=(a+b)h/2)
+     *
+     * @param p     polynomial (lowest power to highest)
+     * @param left  start point
      * @param right end point
      * @param width equal to 'right minus left'
      * @return area between left and right
