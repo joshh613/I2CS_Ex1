@@ -154,23 +154,23 @@ public class Ex1 {
             }
         }
 
-        if (parts.length > 1 && parts[1] != "") {
+        if (parts.length > 1 && !parts[1].isEmpty()) {
             parts[1] += "x";
         }
 
         for (int i = 2; i < parts.length; i++) {
             String coef = parts[i];
-            if (coef != "") {
+            if (!coef.isEmpty()) {
                 parts[i] += "x^" + i;
             }
         }
 
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         for (int i = parts.length - 1; i >= 0; i--) {
-            ans += parts[i];
+            ans.append(parts[i]);
         }
 
-        if (ans == "") {
+        if (ans.isEmpty()) {
             return "0";
         }
 
@@ -273,8 +273,8 @@ public class Ex1 {
         }
 
         int highestPower = 0;
-        for (int i = 0; i < parts.length; i++) {
-            String[] temp = parts[i].split("\\^");
+        for (String part : parts) {
+            String[] temp = part.split("\\^");
             if (temp.length > 1) {
                 highestPower = Math.max(highestPower, Integer.parseInt(temp[1]));
             } else {
@@ -286,8 +286,8 @@ public class Ex1 {
 
         double[] ans = new double[highestPower + 1];
 
-        for (int i = 0; i < parts.length; i++) {
-            String[] temp = parts[i].split("\\^");
+        for (String part : parts) {
+            String[] temp = part.split("\\^");
 
             if (temp.length > 1) {
                 temp[0] = dropLastChar(ensureDigit(temp[0]));
@@ -318,9 +318,7 @@ public class Ex1 {
         }
 
         double[] ans = new double[Math.max(p1.length, p2.length)];
-        for (int i = 0; i < p1.length; i++) {
-            ans[i] = p1[i];
-        }
+        System.arraycopy(p1, 0, ans, 0, p1.length);
         for (int i = 0; i < p2.length; i++) {
             ans[i] += p2[i];
         }
