@@ -418,33 +418,33 @@ class Ex1Test {
     }
 
     @Test
-    void ensureDigit(){
-         String s = "+3.5x";
-         String expected = "+3.5x";
-         String ans = Ex1.ensureDigit(s);
-         assertEquals(expected, ans);
+    void ensureDigit() {
+        String s = "+3.5x";
+        String expected = "+3.5x";
+        String ans = Ex1.ensureDigit(s);
+        assertEquals(expected, ans);
 
-         s = "+x^2";
-         expected = "+1.0x^2";
-         ans = Ex1.ensureDigit(s);
-         assertEquals(expected, ans);
+        s = "+x^2";
+        expected = "+1.0x^2";
+        ans = Ex1.ensureDigit(s);
+        assertEquals(expected, ans);
     }
 
     @Test
-    void lastCharIs(){
+    void lastCharIs() {
         String s = "abcde";
         char c = 'e';
-        boolean ans =  Ex1.lastCharIs(s, c);
+        boolean ans = Ex1.lastCharIs(s, c);
         assertTrue(ans);
 
         s = "test";
         c = 'x';
-        ans =  Ex1.lastCharIs(s, c);
+        ans = Ex1.lastCharIs(s, c);
         assertFalse(ans);
     }
 
     @Test
-    void dropLastChar(){
+    void dropLastChar() {
         String s = "hello";
         String expected = "hell";
         String ans = Ex1.dropLastChar(s);
@@ -457,41 +457,41 @@ class Ex1Test {
     }
 
     @Test
-    void changeOfSign(){
-         double[] p = {0, 1};
-         double x1 = -2;
-         double x2 = 2;
-         boolean ans = Ex1.changeOfSign(p, x1, x2);
-         assertTrue(ans);
+    void changeOfSign() {
+        double[] p = {0, 1};
+        double x1 = -2;
+        double x2 = 2;
+        boolean ans = Ex1.changeOfSign(p, x1, x2);
+        assertTrue(ans);
 
-         p = new double[]{0, 0, 1};
-         x1 = 1;
-         x2 = 3;
-         ans = Ex1.changeOfSign(p, x1, x2);
-         assertFalse(ans);
+        p = new double[]{0, 0, 1};
+        x1 = 1;
+        x2 = 3;
+        ans = Ex1.changeOfSign(p, x1, x2);
+        assertFalse(ans);
     }
 
     @Test
     void calcArea() {
-         double[] p = {0, 1};
-         double x1 = 0;
-         double x2 = 2;
-         double expected = 2;
-         double ans = Ex1.calcArea(p, x1, x2, x2-x1);
-         assertEquals(expected, ans, Ex1.EPS);
+        double[] p = {0, 1};
+        double x1 = 0;
+        double x2 = 2;
+        double expected = 2;
+        double ans = Ex1.calcArea(p, x1, x2, x2 - x1);
+        assertEquals(expected, ans, Ex1.EPS);
 
-         p = new double[]{1, 1};
-         x1 = -5;
-         x2 = 5;
-         expected = 8+18;
-         ans = Ex1.calcArea(p, x1, x2, x2-x1);
-         assertEquals(expected, ans, Ex1.EPS);
+        p = new double[]{1, 1};
+        x1 = -5;
+        x2 = 5;
+        expected = 8 + 18;
+        ans = Ex1.calcArea(p, x1, x2, x2 - x1);
+        assertEquals(expected, ans, Ex1.EPS);
 
         p = new double[]{1, 2};
         x1 = 0;
         x2 = 10;
-        expected = (1+21)*5;
-        ans = Ex1.calcArea(p, x1, x2, x2-x1);
+        expected = (1 + 21) * 5;
+        ans = Ex1.calcArea(p, x1, x2, x2 - x1);
         assertEquals(expected, ans, Ex1.EPS);
     }
 

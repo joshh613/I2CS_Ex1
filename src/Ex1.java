@@ -471,11 +471,11 @@ public class Ex1 {
         if (changeOfSign(p, left, right)) {
             double root = root_rec(p, left, right, EPS);
 
-            double b = left - root;
+            double b = root - left;
             double h = f(p, left);
             area += Math.abs(b * h / 2);
 
-            b = root - right;
+            b = right - root;
             h = f(p, right);
             area += Math.abs(b * h / 2);
 
