@@ -194,15 +194,21 @@ public class Ex1 {
      * @param x1  minimal value of the range
      * @param x2  maximal value of the range
      * @param eps epsilon (positive small value (often 10^-3, or 10^-6).
-     * @return an x value (x1<=x<=x2) for which |p1(x) - p2(x)| < eps.
+     * @return an x value (x1<=x<=x2) for which |p1(x) - p2(x)| < eps (or {@code Double.NaN} if there is no solution
      */
     public static double sameValue(double[] p1, double[] p2, double x1, double x2, double eps) {
         if (p1 == null || p2 == null) {
-            return -1;
+            throw new IllegalArgumentException("Polynomials must not be null");
         }
 
         double[] p = add(p1, neg(p2));
-        return root_rec(p, x1, x2, eps);
+
+        if (changeOfSign(p, x1, x2)) {
+            return root_rec(p, x1, x2, eps);
+        }
+
+        return Double.NaN;
+
     }
 
     /**
@@ -489,5 +495,17 @@ public class Ex1 {
         }
 
         return area;
+    }
+
+    public static double[] removeTrailingZeros(double[] p) {
+        int i = p.length - 1;
+        while (i > 0 && Math.abs(p[i]) < EPS) {
+            i--;
+        }
+
+        double[] ans = new double[i + 1];
+        System.arraycopy(p, 0, ans, 0, i + 1);
+
+        return ans;
     }
 }
