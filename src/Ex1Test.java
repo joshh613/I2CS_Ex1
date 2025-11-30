@@ -495,6 +495,21 @@ class Ex1Test {
         assertEquals(expected, ans, Ex1.EPS);
     }
 
+    @Test
+    void removeTrailingZeros() {
+        double[] p = {0, 1};
+        assertArrayEquals(p, Ex1.removeTrailingZeros(p), Ex1.EPS);
+
+        double[] p1 = {0, 1, 0};
+        assertArrayEquals(p, Ex1.removeTrailingZeros(p1), Ex1.EPS);
+
+        p1 = new double[]{0, 1, 0, 0, 0, 0};
+        assertArrayEquals(p, Ex1.removeTrailingZeros(p1), Ex1.EPS);
+
+        p1 = new double[]{0, 0};
+        assertArrayEquals(new double[]{0}, Ex1.removeTrailingZeros(p1), Ex1.EPS);
+    }
+
     //EDGE CASES
 
     @Test
@@ -603,10 +618,8 @@ class Ex1Test {
         assertTrue(Double.isFinite(ans)); //some answer was reached
 
         //null
-        assertThrows(IllegalArgumentException.class,
-                () -> Ex1.sameValue(null, p2, 0, 1, Ex1.EPS));
-        assertThrows(IllegalArgumentException.class,
-                () -> Ex1.sameValue(p1, null, 0, 1, Ex1.EPS));
+        assertThrows(IllegalArgumentException.class, () -> Ex1.sameValue(null, p2, 0, 1, Ex1.EPS));
+        assertThrows(IllegalArgumentException.class, () -> Ex1.sameValue(p1, null, 0, 1, Ex1.EPS));
     }
 
     @Test
