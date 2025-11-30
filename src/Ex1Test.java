@@ -645,4 +645,72 @@ class Ex1Test {
         double area = Ex1.area(p1, p2, -2, 2, 1000);
         assertTrue(area > 0);
     }
+
+    @Test
+    void getPolynomFromString_edgeCases() {
+        //constant
+        String s = "5.0";
+        double[] expected = {5.0};
+        assertArrayEquals(expected, Ex1.getPolynomFromString(s), Ex1.EPS);
+
+        //single x, implicit +
+        s = "3x";
+        expected = new double[]{0, 3};
+        assertArrayEquals(expected, Ex1.getPolynomFromString(s), Ex1.EPS);
+
+        //single x, negative
+        s = "-x";
+        expected = new double[]{0, -1};
+        assertArrayEquals(expected, Ex1.getPolynomFromString(s), Ex1.EPS);
+
+        //leading +
+        s = "+2.0x^2 -3.0x +1.0";
+        expected = new double[]{1, -3, 2};
+        assertArrayEquals(expected, Ex1.getPolynomFromString(s), Ex1.EPS);
+    }
+
+    @Test
+    void add_edgeCases() {
+        //different lengths
+        double[] p1 = {1, 2};
+        double[] p2 = {3, 4, 5};
+        double[] expected = {4, 6, 5};
+        assertArrayEquals(expected, Ex1.add(p1, p2), Ex1.EPS);
+
+        //null
+        assertNull(Ex1.add(null, p2));
+        assertNull(Ex1.add(p1, null));
+    }
+
+    @Test
+    void mul_edgeCases() {
+        //constant
+        double[] p1 = {2};
+        double[] p2 = {1, 1, 1};
+        double[] expected = {2, 2, 2};
+        assertArrayEquals(expected, Ex1.mul(p1, p2), Ex1.EPS);
+
+        //different lengths
+        p1 = new double[]{1, 0, -1};
+        p2 = new double[]{1, 2};
+        expected = new double[]{1, 2, -1, -2};
+        assertArrayEquals(expected, Ex1.mul(p1, p2), Ex1.EPS);
+
+        //null
+        assertNull(Ex1.mul(null, p2));
+        assertNull(Ex1.mul(p1, null));
+        assertNull(Ex1.mul(new double[]{}, new double[]{1}));
+    }
+
+    @Test
+    void derivative_edgeCases() {
+        //null
+        assertNull(Ex1.derivative(null));
+        assertNull(Ex1.derivative(new double[]{}));
+
+        //zero coeff
+        double[] p = {1, 0, 2, 0, 3};
+        double[] expected = {0, 4, 0, 12};
+        assertArrayEquals(expected, Ex1.derivative(p), Ex1.EPS);
+    }
 }
