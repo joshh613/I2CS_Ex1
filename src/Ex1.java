@@ -499,6 +499,11 @@ public class Ex1 {
         return area;
     }
 
+    /**
+     * Removes trailing zeros of a polynomial array.
+     * @param p polynomial array
+     * @return a copy of p with no trailing zeros (if p=0, then it will return {@code {0}})
+     */
     public static double[] removeTrailingZeros(double[] p) {
         int i = p.length - 1;
         while (i > 0 && Math.abs(p[i]) < EPS) {
