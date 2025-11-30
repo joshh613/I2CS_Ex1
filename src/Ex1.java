@@ -342,17 +342,12 @@ public class Ex1 {
      *
      * @param p1 first polynomial
      * @param p2 second polynomial
-     * @return p1*p2 (or {@link #ZERO} if either input is {@link #ZERO}, or {@code null} if either input is {@code null})
+     * @return p1*p2 (or {@code null} if either input is {@code null})
      */
     public static double[] mul(double[] p1, double[] p2) {
         if (p1 == null || p2 == null || p1.length == 0 || p2.length == 0) {
             return null;
         }
-
-        if (p1 == ZERO || p2 == ZERO) {
-            return ZERO;
-        }
-
 
         double[] ans = new double[p1.length + p2.length - 1];
 
@@ -362,7 +357,7 @@ public class Ex1 {
             }
         }
 
-        return ans;
+        return removeTrailingZeros(ans);
     }
 
     /**
