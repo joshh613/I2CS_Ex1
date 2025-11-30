@@ -451,8 +451,15 @@ public class Ex1 {
      * @return {@code true} if there is a change of sign
      */
     public static boolean changeOfSign(double[] p, double left, double right) {
-        boolean signL = f(p, left) > 0;
-        boolean signR = f(p, right) > 0;
+        double fL = f(p, left);
+        double fR = f(p, right);
+
+        if (Math.abs(fL) < EPS || Math.abs(fR) < EPS) {
+            return true;
+        }
+
+        boolean signL = fL > 0;
+        boolean signR = fR > 0;
 
         return signL != signR;
     }
