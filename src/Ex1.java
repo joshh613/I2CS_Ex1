@@ -92,6 +92,10 @@ public class Ex1 {
             double b = (xx[2] * xx[2] * (yy[0] - yy[1]) + xx[1] * xx[1] * (yy[2] - yy[0]) + xx[0] * xx[0] * (yy[1] - yy[2])) / denom;
             double c = (xx[2] * (yy[1] - yy[0]) + xx[1] * (yy[0] - yy[2]) + xx[0] * (yy[2] - yy[1])) / denom;
 
+            if (c == 0) {
+                return new double[]{a, b};
+            }
+
             return new double[]{a, b, c};
         }
 
