@@ -273,13 +273,13 @@ public class Ex1 {
      * representation. Note: given a polynomial function represented as a double array,
      * getPolynomFromString(poly(p)) should return an array equals to p.
      *
-     * @param p a String representing polynomial function
+     * @param p a String representing polynomial function, spaces between each coefficient
      * @return the array representing polynomial p
      */
     public static double[] getPolynomFromString(String p) {
         String[] parts = p.split(" ");
 
-        if (parts[0].charAt(0) != '-') {
+        if (parts[0].charAt(0) != '-' && parts[0].charAt(0) != '+') {
             parts[0] = "+" + parts[0];
         }
 
