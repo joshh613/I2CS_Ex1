@@ -545,7 +545,7 @@ class Ex1Test {
         //Three points of linear function (y = 2x + 1)
         double[] xx = {0, 1, 2};
         double[] yy = {1, 3, 5};
-        double[] expected = {1, 2, 0};
+        double[] expected = {1, 2};
         double[] ans = Ex1.PolynomFromPoints(xx, yy);
         assertArrayEquals(expected, ans, Ex1.EPS);
 
@@ -603,8 +603,10 @@ class Ex1Test {
         assertTrue(Double.isFinite(ans)); //some answer was reached
 
         //null
-        assertEquals(-1.0, Ex1.sameValue(null, p2, 0, 1, Ex1.EPS));
-        assertEquals(-1.0, Ex1.sameValue(p1, null, 0, 1, Ex1.EPS));
+        assertThrows(IllegalArgumentException.class,
+                () -> Ex1.sameValue(null, p2, 0, 1, Ex1.EPS));
+        assertThrows(IllegalArgumentException.class,
+                () -> Ex1.sameValue(p1, null, 0, 1, Ex1.EPS));
     }
 
     @Test
